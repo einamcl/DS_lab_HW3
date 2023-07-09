@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 class GNN(nn.Module):
     def __init__(self, input_dim, hidden_dim_0, hidden_dim_1,hidden_dim_2, output_dim):
         super(GNN, self).__init__()
-
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         torch.manual_seed(42)
         self.conv0 = GCNConv(input_dim, hidden_dim_0).to(device)
         self.conv1 = GCNConv(hidden_dim_0, hidden_dim_1).to(device)

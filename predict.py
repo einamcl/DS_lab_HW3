@@ -30,8 +30,11 @@ def get_predictions(model, x, edge_index):
 
 
 if __name__ == '__main__':
-    # Define the device to be used (CPU or GPU if available)
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+    dataset = HW3Dataset(root='data/hw3/')
+    data = dataset[0]
+    # Define the device to be used (CPU or GPU if available)
 
     # Define the dimensions of your input and output
 
