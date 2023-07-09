@@ -1,0 +1,22 @@
+name: hw3_env
+channels:
+  - conda-forge
+  - defaults
+  - pyg
+  - pytorch
+dependencies:
+  - pip
+  - python=3.10.11
+  - pytorch=2.0.0
+  - pyg=2.3.0
+  - scikit-learn=1.2.2
+  - numpy=1.25.0
+  - pandas=2.0.2
+  - scipy=1.10.1
+  - matplotlib=3.7.1
+  - seaborn=0.12.2
+  - tqdm=4.65.0
+  - jupyter=1.0.0
+  - ipykernel=6.23.1
+  - pip:
+    - networkx==3.1
