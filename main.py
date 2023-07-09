@@ -64,7 +64,6 @@ if __name__ == '__main__':
     # Import data
     dataset = HW3Dataset(root='data/hw3/')
     data = dataset[0]
-    #sss
 
     # Define the device to be used (CPU or GPU if available)
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
