@@ -30,6 +30,7 @@ def get_predictions(model, x, edge_index):
 
 
 if __name__ == '__main__':
+
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     dataset = HW3Dataset(root='data/hw3/')
@@ -45,8 +46,9 @@ if __name__ == '__main__':
     output_dim = 40  # Number of classes in your classification task
 
     # Create the model
-    model = GNN(input_dim, hidden_dim_0, hidden_dim_1, hidden_dim_2, output_dim).to(device)
-    model = torch.load('model.pt')
+    model = GNN(input_dim, hidden_dim_0, hidden_dim_1, hidden_dim_2, output_dim)  # .to(device)
+    model.load_state_dict(torch.load('model_GNN.pth', map_location=device))
+
     # Define the loss function (criterion) and optimizer
     criterion = nn.CrossEntropyLoss().to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
