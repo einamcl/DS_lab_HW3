@@ -30,7 +30,6 @@ def get_predictions(model, x, edge_index):
 
 
 if __name__ == '__main__':
-
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     dataset = HW3Dataset(root='data/hw3/')
