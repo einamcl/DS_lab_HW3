@@ -131,4 +131,4 @@ if __name__ == '__main__':
     predicts = pd.DataFrame()
     predicts['idx'] = indx
     predicts["prediction"] = predicted_labels
-    predicts.to_csv("predict.csv")
+    predicts.to_csv("predict.csv", index=False)
