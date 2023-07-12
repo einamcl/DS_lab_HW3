@@ -1,20 +1,7 @@
-import requests
-import os
 # !pip install torch_geometric
-from torch_geometric.data import Dataset
-import torch
-from torch.nn import Linear
-import torch.nn.functional as F
-import torch
-from torch_geometric.data import Data
 import pandas as pd
-from torch_geometric.nn import GCNConv
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
-from torch_geometric.nn import GCNConv
-import matplotlib.pyplot as plt
-import numpy as np
 from GnnClassifier import GNN
 from dataset import HW3Dataset
 
@@ -80,12 +67,15 @@ if __name__ == '__main__':
     predicts["prediction"] = predicted_labels
     predicts.to_csv("predict.csv")
 
-    x = data.x.to(device)
-    edge_index = data.edge_index.to(device)
-    y = data.y.to(device)
-    train_mask = data.train_mask.to(device)
-    val_mask = data.val_mask.to(device)
+
     try:
+
+        x = data.x.to(device)
+        edge_index = data.edge_index.to(device)
+        y = data.y.to(device)
+        train_mask = data.train_mask.to(device)
+        val_mask = data.val_mask.to(device)
+
         accuracy = test(model)
         print(f"Accuracy: {accuracy:.2f}%")
     except:
