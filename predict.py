@@ -7,7 +7,7 @@ from torch.nn import Linear
 import torch.nn.functional as F
 import torch
 from torch_geometric.data import Data
-
+import pandas as pd
 from torch_geometric.nn import GCNConv
 import torch
 import torch.nn as nn
@@ -56,3 +56,12 @@ if __name__ == '__main__':
     x = data.x.to(device)
     edge_index = data.edge_index.to(device)
     print(get_predictions(model, x, edge_index))
+
+    # save to csv
+    predicted_labels = get_predictions(model)
+    indx = [i for i in range(data.x.shape[0])]
+    predicts = pd.DataFrame()
+    predicts['idx'] = indx
+    predicts["prediction"] = predicted_labels
+    predicts.to_csv("predict.csv")
+
