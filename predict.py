@@ -14,7 +14,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch_geometric.nn import GCNConv
 import matplotlib.pyplot as plt
-
+import numpy as np
 from GnnClassifier import GNN
 from dataset import HW3Dataset
 
@@ -58,10 +58,9 @@ if __name__ == '__main__':
     print(get_predictions(model, x, edge_index))
 
     # save to csv
-    predicted_labels = get_predictions(model)
+    predicted_labels = get_predictions(model, x, edge_index)
     indx = [i for i in range(data.x.shape[0])]
     predicts = pd.DataFrame()
     predicts['idx'] = indx
     predicts["prediction"] = predicted_labels
     predicts.to_csv("predict.csv")
-
