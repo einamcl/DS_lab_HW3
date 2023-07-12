@@ -29,6 +29,21 @@ def get_predictions(model, x, edge_index):
     return predicted_labels.numpy()
 
 
+def test(model):
+    model.eval()
+    with torch.no_grad():
+        test_output = model(x, edge_index)[val_mask]
+        _, predicted_labels = test_output.max(dim=1)
+
+    predicted_labels = predicted_labels.cpu()
+    ground_truth_labels = y[val_mask].squeeze().cpu()
+
+    correct = (predicted_labels == ground_truth_labels).sum().item()
+    total = ground_truth_labels.size(0)
+    accuracy = correct / total * 100
+    return accuracy
+
+
 if __name__ == '__main__':
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -64,3 +79,14 @@ if __name__ == '__main__':
     predicts['idx'] = indx
     predicts["prediction"] = predicted_labels
     predicts.to_csv("predict.csv")
+
+    x = data.x.to(device)
+    edge_index = data.edge_index.to(device)
+    y = data.y.to(device)
+    train_mask = data.train_mask.to(device)
+    val_mask = data.val_mask.to(device)
+    try:
+        accuracy = test(model)
+        print(f"Accuracy: {accuracy:.2f}%")
+    except:
+        print()
